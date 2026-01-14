@@ -1,104 +1,257 @@
-:root { --primary: #00bcd4; }
+/* =========================
+   CNC SHARE - accueil.css
+   Thème sombre/clair + UI
+   ========================= */
+
+/* --- Variables de thème (par défaut: dark) --- */
+:root{
+  --bg: #0f0f14;
+  --bg-elevated: #15151a;
+  --bg-elevated-2: #252530;
+  --panel: rgba(30, 30, 36, 0.80);
+
+  --border-subtle: #333;
+  --border-mid: #2a2a33;
+  --border-strong: #3d3d4d;
+
+  --text-main: #e8e8ee;
+  --text-muted: #888;
+
+  --primary: #00bcd4;
+
+  --danger: #ff5050;
+}
+
+/* --- Thème clair --- */
+html[data-theme="light"]{
+  --bg: #f4f5fb;
+  --bg-elevated: #ffffff;
+  --bg-elevated-2: #f1f2f9;
+  --panel: rgba(255, 255, 255, 0.85);
+
+  --border-subtle: #d0d3e0;
+  --border-mid: #e3e6f2;
+  --border-strong: #c0c4d4;
+
+  --text-main: #1b1d25;
+  --text-muted: #666a80;
+
+  --primary: #007bff;
+
+  --danger: #d83b3b;
+}
+
+/* --- Base --- */
+*{ box-sizing: border-box; }
+
+html, body{ height: 100%; }
 
 body{
-  margin:0;
+  margin: 0;
   font-family: 'Roboto Mono', monospace;
-  background:#0f0f14;
-  color:#e8e8ee;
+  background: var(--bg);
+  color: var(--text-main);
 }
 
+a{ color: inherit; }
+
+/* --- Fond quadrillé --- */
 .background-grid{
-  position:fixed;
-  inset:0;
-  background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
   background-size: 40px 40px;
-  pointer-events:none;
+  opacity: 1;
 }
 
+html[data-theme="light"] .background-grid{
+  background-image:
+    linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px);
+}
+
+/* --- Toggle thème (en haut à gauche) --- */
+.theme-toggle{
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 1000;
+}
+
+.theme-toggle button{
+  font-family: inherit;
+  font-size: 0.8rem;
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-elevated);
+  color: var(--text-main);
+  cursor: pointer;
+}
+
+.theme-toggle button:hover{
+  border-color: var(--primary);
+}
+
+/* --- Login/Register layout --- */
 .container{
   max-width: 520px;
   margin: 60px auto;
   padding: 24px;
 }
 
-.logo, .logo-small{
-  font-weight:700;
-  letter-spacing:1px;
+header{
+  margin-bottom: 16px;
 }
-.logo span, .logo-small span{ color: var(--primary); }
 
-.auth-panel, .card{
-  background:#15151a;
-  border:1px solid #333;
-  padding:20px;
-  border-radius:6px;
-  margin-top:18px;
+.logo{
+  font-weight: 700;
+  letter-spacing: 1px;
+  font-size: 2rem;
+}
+
+.logo span{ color: var(--primary); }
+
+.auth-panel{
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  padding: 20px;
+  border-radius: 8px;
 }
 
 .tabs{
-  display:flex;
-  gap:10px;
-  margin-bottom:12px;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
 }
+
 .tabs a{
-  color:#aaa;
-  text-decoration:none;
-  padding:8px 10px;
-  border-bottom:2px solid transparent;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 8px 10px;
+  border-bottom: 2px solid transparent;
 }
-.tabs a.active{ color:#fff; border-color: var(--primary); }
+
+.tabs a.active{
+  color: var(--text-main);
+  border-color: var(--primary);
+}
 
 .form-group{ margin: 12px 0; }
-label{ display:block; margin-bottom:6px; color:#bbb; }
+
+label{
+  display: block;
+  margin-bottom: 6px;
+  color: var(--text-muted);
+}
+
 input, select{
-  width:100%;
-  padding:10px;
-  border:1px solid #333;
-  background:#0f0f14;
-  color:#fff;
-  border-radius:6px;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg);
+  color: var(--text-main);
+  border-radius: 8px;
+  outline: none;
 }
 
-.btn{
-  display:inline-block;
-  padding:10px 14px;
-  border-radius:6px;
-  text-decoration:none;
-  cursor:pointer;
-  border:1px solid #333;
-}
-.btn-primary{
-  background: rgba(0,188,212,0.15);
-  border-color: rgba(0,188,212,0.5);
-  color:#e8feff;
+input:focus, select:focus{
+  border-color: var(--primary);
 }
 
+/* --- Alerts --- */
 .alert{
-  padding:10px 12px;
-  border-radius:6px;
-  background: rgba(255,80,80,0.12);
-  border:1px solid rgba(255,80,80,0.35);
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: rgba(255, 80, 80, 0.12);
+  border: 1px solid rgba(255, 80, 80, 0.35);
   margin: 10px 0;
 }
+
 .alert.success{
-  background: rgba(80,255,160,0.10);
-  border-color: rgba(80,255,160,0.35);
+  background: rgba(80, 255, 160, 0.10);
+  border-color: rgba(80, 255, 160, 0.35);
 }
 
-.table{
-  width:100%;
-  border-collapse: collapse;
-}
-.table th, .table td{
-  border-bottom: 1px solid #2a2a33;
-  padding: 10px;
-  text-align:left;
+/* --- Buttons --- */
+.btn{
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid var(--border-subtle);
+  background: transparent;
+  color: var(--text-main);
 }
 
-.searchbar{
-  display:flex;
-  gap:10px;
-  margin: 10px 0 18px;
+.btn-primary{
+  background: rgba(0,188,212,0.15);
+  border-color: rgba(0,188,212,0.50);
+  color: #e8feff;
 }
-.searchbar input{ flex:1; }
+
+html[data-theme="light"] .btn-primary{
+  background: rgba(0,123,255,0.12);
+  border-color: rgba(0,123,255,0.55);
+  color: #063a7a;
+}
+
+.btn-danger{
+  background: rgba(255,80,80,0.12);
+  border-color: rgba(255,80,80,0.45);
+  color: #ffd5d5;
+}
+
+html[data-theme="light"] .btn-danger{
+  background: rgba(216,59,59,0.10);
+  border-color: rgba(216,59,59,0.45);
+  color: #7a0c0c;
+}
+
+.btn:hover{
+  border-color: var(--primary);
+}
+
+/* =========================
+   Dashboard / Sidebar
+   ========================= */
+
+.dashboard-wrapper{
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.sidebar{
+  width: 260px;
+  background: var(--bg-elevated);
+  border-right: 1px solid var(--border-subtle);
+  padding: 25px;
+  flex-shrink: 0;
+}
+
+.logo-small{
+  font-weight: 700;
+  letter-spacing: 1px;
+  font-size: 1.4rem;
+}
+
+.logo-small span{ color: var(--primary); }
+
+.sidebar ul{
+  list-style: none;
+  padding: 0;
+  margin-top: 40px;
+}
+
+.sidebar ul li a{
+  display: block;
+  padding: 15px;
+  color: var(--text-muted);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border-mid);
+  

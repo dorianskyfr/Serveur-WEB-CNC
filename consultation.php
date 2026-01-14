@@ -59,6 +59,7 @@ include __DIR__ . "/partials/layout_top.php";
             <td><?= htmlspecialchars($f['created_at']) ?></td>
             <td style="display:flex;gap:10px;align-items:center;">
               <a class="btn btn-primary" href="download.php?id=<?= (int)$f['id'] ?>">Télécharger</a>
+              <a class="btn btn-primary" href="viewer.php?id=<?= (int)$f['id'] ?>">Voir 3D</a>
 
               <?php
                 $ownerId = (int)($f['owner_user_id'] ?? 0);
