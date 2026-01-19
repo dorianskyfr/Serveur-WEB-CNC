@@ -1,6 +1,0 @@
--stocker fichier(trier)
--table avec l'historique des impression et l'heure et jour et depot
--gestion des comptes• 
--Créer des pages de consultations en local des fichiers d’usinage
--Conserver les logs de connexions
--Les pages permettant le transfert des fichiers d’usinage depuis le concepteur et vers l’interface de la CNC 

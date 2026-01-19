@@ -15,8 +15,8 @@ $title = "Enregistrer un fichier";
 $ok = "";
 $err = "";
 
-// Stockage serveur (hors dossier du site)
-$uploadDir = "/srv/cncshare/uploads";
+// Stockage local dans le projet
+$uploadDir = __DIR__ . "/uploads";
 if (!is_dir($uploadDir)) {
     mkdir($uploadDir, 0775, true);
 }
@@ -40,10 +40,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
             $err = "Extension non autorisée: " . htmlspecialchars($ext);
         } else {
             $stored = uniqid("job_", true) . "." . $ext;
-            $fullPath = rtrim($uploadDir, "/") . "/" . $stored; // ABSOLU
+
+            // Chemin relatif (BDD) et absolu (disque)
+            $relPath  = "uploads/" . $stored;
+            $fullPath = $uploadDir . "/" . $stored;
 
             if (!move_uploaded_file($f['tmp_name'], $fullPath)) {
-                $err = "Impossible de sauvegarder le fichier (droits sur /srv/cncshare/uploads).";
+                $err = "Impossible de sauvegarder le fichier (droits sur uploads/).";
             } else {
                 $sha = hash_file('sha256', $fullPath);
                 $size = filesize($fullPath);
@@ -59,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
                     (int)$_SESSION['user_id'],
                     $original,
                     $stored,
-                    $fullPath,   // on stocke le chemin ABSOLU
+                    $relPath,   // stocké RELATIF
                     $ext,
                     (int)$size,
                     $sha

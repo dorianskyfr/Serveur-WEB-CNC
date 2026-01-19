@@ -74,12 +74,7 @@ html[data-theme="light"] .background-grid{
 }
 
 /* --- Toggle thème (en haut à gauche) --- */
-.theme-toggle{
-  position: fixed;
-  top: 12px;
-  left: 12px;
-  z-index: 1000;
-}
+
 
 .theme-toggle button{
   font-family: inherit;
@@ -255,3 +250,29 @@ html[data-theme="light"] .btn-danger{
   text-decoration: none;
   border-bottom: 1px solid var(--border-mid);
   
+}
+/* Logo + bouton thème côte à côte */
+.sidebar-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:20px;
+}
+
+/* Bouton thème (dans la sidebar, plus en fixed) */
+.theme-btn{
+  font-family: inherit;
+  font-size: 0.8rem;
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border-subtle, #333);
+  background: var(--bg-elevated, #15151a);
+  color: var(--text-main, #e8e8ee);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.theme-btn:hover{
+  border-color: var(--primary, #00bcd4);
+}

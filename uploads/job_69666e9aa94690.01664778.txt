@@ -1,6 +1,0 @@
--mise en oeuvre de trello d'un espace drive et d'un serveur discord(05/01/26)
--presentation d'un ancien projet fait par le Fab-labs(06/01/26)
--Debut du cahier des charges(Commencer le 06/01/26 fin le 08/01/26 )
--Diagramme de sequence(commencer le 08/01/26 fin le 11/01/26)
--creation du site web(commencer le 12/01/26 )
--creation de la bdd(commencer le 12/01/26) mdp :CNC2026 et user Projetcnc et admin admin1234
